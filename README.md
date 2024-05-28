@@ -33,7 +33,8 @@ The research methodology employed in this project consists of several key compon
 ## Circuit Connection Diagram
 Refer to the [VSDSquadron Mini Datasheet](https://www.vlsisystemdesign.com/docs/vsdsquadronminidatasheet/getting-started/) for detailed specifications and pin configurations.
 
-![Circuit Connection Diagram](C:\Users\Pranav\Desktop\circuit diagarm.png)
+![Circuit Connection Diagram](![circuit diagarm](https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/170928924/22f2b3ee-58fa-40c5-9ac7-7c786cd3f145)
+)
 
 ## Table for Pin Connection
 
