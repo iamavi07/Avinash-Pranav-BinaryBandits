@@ -31,7 +31,7 @@ The research methodology employed in this project consists of several key compon
 
 
 ## Circuit Connection Diagram
-Refer to the [VSDSquadron Mini Datasheet](https://www.vlsisystemdesign.com/docs/vsdsquadronminidatasheet/getting-started/) for detailed specifications and pin configurations.
+Specifications and Pin Configurations.
 
 <img width="700" hegight="1000" alt="PowerPoint Slide Show  -  Presentation1 pptx 5_3_2024 12_29_08 PM" src="https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/170928924/22f2b3ee-58fa-40c5-9ac7-7c786cd3f145">
 
@@ -42,7 +42,7 @@ Refer to the [VSDSquadron Mini Datasheet](https://www.vlsisystemdesign.com/docs/
 | Signal Output  | OUT             | Analog Pin (PA1)     |
 | Power Supply   | VCC             | 3.3V                 |
 | Ground         | GND             | GND                  |
-| LED Control    | -               | Digital Pin (PD6)    |
+| LED Control    | -               | Digital Pin (PD1-6)    |
 | USART RX       | -               | PD6                  |
 | USART TX       | -               | PD5                  |
 | I2C SDA        | -               | PC1                  |
