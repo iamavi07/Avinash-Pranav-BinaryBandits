@@ -37,20 +37,33 @@ Specifications and Pin Configurations.
 
 ## Table for Pin Connection
 
-| Function       | EMG Module Pin | VSDSquadron Mini Pin |
-|----------------|-----------------|----------------------|
-| Signal Output  | OUT             | Analog Pin (PA1)     |
-| Power Supply   | VCC             | 3.3V                 |
-| Ground         | GND             | GND                  |
-| LED Control    | -               | Digital Pin (PD1-6)    |
-| USART RX       | -               | PD6                  |
-| USART TX       | -               | PD5                  |
-| I2C SDA        | -               | PC1                  |
-| I2C SCL        | -               | PC2                  |
-| SPI SCK        | -               | PC5                  |
-| SPI NSS        | -               | PC1                  |
-| SPI MOSI       | -               | PC6                  |
-| SPI MISO       | -               | PC7                  |
+| EMG Module Pin | VSDSquadron Mini Pin |
+|----------------|----------------------|
+| Signal Output  | Analog Pin (PA1)     |
+| Ground         | GND                  |
+
+| LED Array       | VSDSquadeon Mini Pin |
+|----------------|----------------------|
+| LED 1(Anode)   | PD1                  |
+| LED 1(Anode)   | PD2                  |
+| LED 1(Anode)   | PD3                  |
+| LED 1(Anode)   | PD4                  |
+| LED 1(Anode)   | PD5                  |
+| LED 1(Anode)   | PD6                  |
+| LED(1-6)cathode| GND                  |
+
+
+| EMG Module     | Power Supply         |
+|----------------|----------------------|
+| +Vs            | +9V                  |
+| GND            | Ground               |
+| -Vs            | -9V                  |
+
+
+
+
+
+
 
 
 ## Discussion
