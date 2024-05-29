@@ -79,4 +79,4 @@ In conclusion, the Electromyography (EMG) Research Project has provided valuable
 
 
 ## References
-
+The reference of electromyography procedure obtained by : https://www.mayoclinic.org/tests-procedures/emg/about/pac-20393913
