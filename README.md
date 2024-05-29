@@ -44,12 +44,12 @@ Specifications and Pin Configurations.
 
 | LED Array              | VSDSquadeon Mini Pin       |
 |------------------------|----------------------------|
-| LED 1(Anode)           | PD1                        |
-| LED 1(Anode)           | PD2                        |
-| LED 1(Anode)           | PD3                        |
-| LED 1(Anode)           | PD4                        |
-| LED 1(Anode)           | PD5                        |
-| LED 1(Anode)           | PD6                        |
+| LED 1(Anode)           | Digital Pin (PD1)          |
+| LED 1(Anode)           | Digital Pin (PD2)          |
+| LED 1(Anode)           | Digital Pin (PD3)          |
+| LED 1(Anode)           | Digital Pin (PD4)          |
+| LED 1(Anode)           | Digital Pin (PD5)          |
+| LED 1(Anode)           | Digital Pin (PD6)          |
 | LED(1-6)Common cathode | GND                        |
 
 
