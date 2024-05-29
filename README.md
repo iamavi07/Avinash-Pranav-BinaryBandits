@@ -42,15 +42,15 @@ Specifications and Pin Configurations.
 | Signal Output  | Analog Pin (PA1)     |
 | Ground         | GND                  |
 
-| LED Array       | VSDSquadeon Mini Pin |
-|----------------|----------------------|
-| LED 1(Anode)   | PD1                  |
-| LED 1(Anode)   | PD2                  |
-| LED 1(Anode)   | PD3                  |
-| LED 1(Anode)   | PD4                  |
-| LED 1(Anode)   | PD5                  |
-| LED 1(Anode)   | PD6                  |
-| LED(1-6)cathode| GND                  |
+| LED Array              | VSDSquadeon Mini Pin       |
+|------------------------|----------------------------|
+| LED 1(Anode)           | PD1                        |
+| LED 1(Anode)           | PD2                        |
+| LED 1(Anode)           | PD3                        |
+| LED 1(Anode)           | PD4                        |
+| LED 1(Anode)           | PD5                        |
+| LED 1(Anode)           | PD6                        |
+| LED(1-6)Common cathode | GND                        |
 
 
 | EMG Module     | Power Supply         |
