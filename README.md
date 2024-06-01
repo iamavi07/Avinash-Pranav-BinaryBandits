@@ -62,9 +62,85 @@ Specifications and Pin Configurations.
 
 
 
+## Working Code
+```
 
+#include <debug.h>
+#include <ch32v00x.h>
+#include <stdint.h>
 
+// Function prototypes
+void GPIO_LED_INIT(void);
+uint16_t map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
+uint16_t ADC_Read(uint16_t pin);
+void Delay_ms(uint32_t ms);
 
+// Function to configure GPIO Pins
+void GPIO_LED_INIT(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure = {0};
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1; // Changed to GPIO_Pin_1 (PA1)
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // Assuming GPIO_Pin_1 is an input pin
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+}
+
+// Function to map values from one range to another
+uint16_t map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)
+{
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+// Main Function
+int main(void)
+{
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    SystemCoreClockUpdate();
+    Delay_Init();
+    GPIO_LED_INIT();
+
+    while(1)
+    {
+        uint16_t analogValue = ADC_Read(GPIO_Pin_1); // Changed to GPIO_Pin_1 (PA1)
+        uint16_t mappedValue = map(analogValue, 0, 1023, 0, 6);
+
+        // Clear all LED pins
+        for(int i = 1; i <= 6; i++) {
+            GPIO_WriteBit(GPIOD, (1 << i), (BitAction)RESET); // Cast RESET to BitAction
+        }
+
+        // Turn on LEDs based on the mapped value
+        for(int i = 1; i <= mappedValue; i++) {
+            GPIO_WriteBit(GPIOD, (1 << (i - 1)), (BitAction)SET);
+        }
+
+        Delay_ms(100);
+    }
+}
+
+// Placeholder function for reading the analog value from ADC
+uint16_t ADC_Read(uint16_t pin)
+{
+    // Implement ADC reading logic here
+    return 512; // Example return value, replace with actual ADC reading
+}
+
+// Placeholder for Delay_ms function
+void Delay_ms(uint32_t ms)
+{
+    // Implement delay logic here
+}
+```
+
+## Demo Video
 
 ## Discussion
 The discussion section interprets the results within the context of the research objectives and literature reviewed. Key findings, including muscle activation patterns, fatigue mechanisms, and neuromuscular coordination, are analyzed and discussed in relation to existing theories and hypotheses. The implications of the findings for clinical diagnosis, rehabilitation strategies, and biomechanical modeling are explored, highlighting the potential applications of electromyography in various medical and engineering fields. Limitations of the study, including sample size constraints, electrode placement variability, and signal processing assumptions, are acknowledged, and future research directions are proposed to address these challenges and expand our understanding of electromyographic principles and practices.
