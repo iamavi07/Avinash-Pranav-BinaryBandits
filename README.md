@@ -141,7 +141,7 @@ void Delay_ms(uint32_t ms)
 ```
 
 ## Demo Video
-
+https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/blob/main/2024-06-01_1717254892391.mp4
 ## Discussion
 The discussion section interprets the results within the context of the research objectives and literature reviewed. Key findings, including muscle activation patterns, fatigue mechanisms, and neuromuscular coordination, are analyzed and discussed in relation to existing theories and hypotheses. The implications of the findings for clinical diagnosis, rehabilitation strategies, and biomechanical modeling are explored, highlighting the potential applications of electromyography in various medical and engineering fields. Limitations of the study, including sample size constraints, electrode placement variability, and signal processing assumptions, are acknowledged, and future research directions are proposed to address these challenges and expand our understanding of electromyographic principles and practices.
 
