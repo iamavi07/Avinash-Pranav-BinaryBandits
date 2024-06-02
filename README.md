@@ -83,7 +83,7 @@ void GPIO_LED_INIT(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
 
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOD, &GPIO_InitStructure);
@@ -110,7 +110,7 @@ int main(void)
     while(1)
     {
         uint16_t analogValue = ADC_Read(GPIO_Pin_1); // Changed to GPIO_Pin_1 (PA1)
-        uint16_t mappedValue = map(analogValue, 0, 1023, 0, 6);
+        uint16_t mappedValue = map(analogValue, 0, 1023, 0, 7);
 
         // Clear all LED pins
         for(int i = 1; i <= 6; i++) {
@@ -118,8 +118,12 @@ int main(void)
         }
 
         // Turn on LEDs based on the mapped value
-        for(int i = 1; i <= mappedValue; i++) {
-            GPIO_WriteBit(GPIOD, (1 << (i - 1)), (BitAction)SET);
+        for(int i = 1; i <= 7; i++) {
+            if(mappedValue > i) {
+               
+                GPIO_WriteBit(GPIOD, i, (BitAction)SET);
+                
+            }
         }
 
         Delay_ms(100);
