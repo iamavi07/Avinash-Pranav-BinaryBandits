@@ -149,6 +149,117 @@ void Delay_ms(uint32_t ms)
 ## Discussion
 The discussion section interprets the results within the context of the research objectives and literature reviewed. Key findings, including muscle activation patterns, fatigue mechanisms, and neuromuscular coordination, are analyzed and discussed in relation to existing theories and hypotheses. The implications of the findings for clinical diagnosis, rehabilitation strategies, and biomechanical modeling are explored, highlighting the potential applications of electromyography in various medical and engineering fields. Limitations of the study, including sample size constraints, electrode placement variability, and signal processing assumptions, are acknowledged, and future research directions are proposed to address these challenges and expand our understanding of electromyographic principles and practices.
 
+# Hardware Security Testing Using Fault Injection
+
+## Fault Injection
+Fault injection is a technique used to test the robustness and reliability of hardware systems by deliberately introducing faults and observing how the system behaves. It is a critical method for identifying vulnerabilities, ensuring reliability, and verifying the resilience of hardware against various types of faults and attacks.
+
+## Purpose of Fault Injection
+1. **Evaluate System Robustness:** To assess how well a system can handle unexpected faults and to ensure it fails gracefully.
+2. **Identify Vulnerabilities:** To find potential security weaknesses that could be exploited by attackers.
+3. **Improve Design:** To provide insights that help in refining and improving the design of hardware systems.
+4. **Compliance and Standards:** To ensure that hardware meets specific industry standards and compliance requirements.
+5. **Test Fault Tolerance Mechanisms:** To validate the effectiveness of fault tolerance and error correction mechanisms implemented in the hardware.
+
+## Methods of Fault Injection
+### Hardware-Based Fault Injection
+- **Electromagnetic Interference (EMI):** Using electromagnetic fields to disrupt the normal operation of hardware.
+- **Voltage Glitching:** Briefly lowering or raising the voltage to induce faults.
+- **Clock Glitching:** Manipulating the clock signal to cause timing errors.
+- **Laser Fault Injection:** Using focused laser beams to induce faults at specific locations on a chip.
+
+### Software-Based Fault Injection
+- **Code Insertion:** Inserting fault-inducing code into the software running on the hardware.
+- **API Manipulation:** Altering API calls to simulate faults.
+- **Exception Triggering:** Forcing exceptions to see how the hardware handles error conditions.
+
+### Simulation-Based Fault Injection
+- **Fault Simulators:** Using simulation tools to model and inject faults in a virtual environment.
+- **Emulators:** Using hardware emulators to mimic real-world conditions and introduce faults.
+
+## Importance of Fault Injection Testing
+1. **Security Assurance:** Helps in uncovering vulnerabilities that could be exploited by attackers, ensuring better security.
+2. **Reliability Improvement:** Identifies weaknesses that can be addressed to improve the overall reliability of the hardware.
+3. **Risk Management:** Provides a way to understand and mitigate potential risks associated with hardware failures.
+4. **Quality Assurance:** Ensures that the hardware meets the required quality standards and performs reliably under fault conditions.
+5. **Compliance:** Helps in meeting regulatory and industry standards that require rigorous testing and validation.
+
+## Challenges and Considerations
+1. **Complexity:** Fault injection testing can be complex and requires a thorough understanding of both hardware and software systems.
+2. **Cost:** Setting up fault injection testing environments, especially hardware-based methods, can be expensive.
+3. **Skill Requirements:** Requires specialized knowledge and skills to design and execute effective fault injection tests.
+4. **False Positives/Negatives:** Risk of producing misleading results, either by not triggering actual vulnerabilities (false negatives) or by triggering irrelevant faults (false positives).
+5. **Impact on Hardware:** Physical fault injection methods can cause permanent damage to hardware, necessitating careful planning and consideration.
+6. **Interpretation of Results:** Analyzing the results of fault injection tests can be challenging and requires expert judgment.
+7. **Test Coverage:** Ensuring comprehensive coverage of all potential fault scenarios can be difficult.
+8. **Safety:** Ensuring the safety of testers and equipment when using methods like high-voltage or laser fault injection.
+# Methods of Fault Injection in ELECTROMYOGRAPHY (EMG) Project
+
+## Hardware-Based Fault Injection: Voltage Glitching
+## Introduction
+This project focuses on hardware-based fault injection using Arduino, specifically exploring two cases: STUCK AT 0 and STUCK AT 1. Fault injection is a crucial technique to assess the robustness and security of hardware systems by deliberately introducing faults and observing their impact.
+### STUCK AT 0
+Voltage glitching causes a specific bit to remain stuck at 0, irrespective of the intended value. This method is useful in testing the system's ability to handle and correct data corruption.
+
+### STUCK AT 1
+Voltage glitching causes a specific bit to remain stuck at 1, irrespective of the intended value. This approach is critical for evaluating the system's resilience against high-level faults and ensuring functional integrity under such conditions.
+
+
+# Hardware-Based Fault Injection Using Arduino
+
+## CASE 1: STUCK AT 0
+
+### Explanation
+In the STUCK AT 0 scenario, a specific signal or bit in the hardware is forced to remain at logic 0 (low) continuously, regardless of its intended value. This can lead to data corruption or system malfunction due to the affected signal's inability to transition to logic 1.
+
+### Application Using Arduino
+To simulate the STUCK AT 0 fault injection using Arduino:
+1. Identify the targeted signal or pin in the Arduino hardware.
+2. Introduce a voltage glitch or manipulation to keep the signal at logic 0 during runtime.
+### Video Demonstration of CASE 1
+
+
+https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/122794054/46037895-2adf-4286-8888-4e4c8c702a5d
+### Working Code of CASE 1
+```
+const int ledPins[] = {2, 3, 4, 5}; // LED pins
+const int numLeds = 4; // Number of LEDs
+
+void setup() {
+  Serial.begin(9600); // Start serial communication at 9600 baud
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT); // Set LED pins as output
+    digitalWrite(ledPins[i], LOW); // Set all LEDs to LOW (stuck at 0)
+  }
+}
+
+void loop() {
+  // Print LED states to Serial Plotter
+  for (int i = 0; i < numLeds; i++) {
+    Serial.print("LED ");
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.print(digitalRead(ledPins[i]));
+    Serial.print("\t");
+  }
+  Serial.println();
+  delay(1000); // Delay for 1 second
+}
+```
+3. Monitor the Arduino system's behavior to observe anomalies such as incorrect data processing or system crashes.
+
+## CASE 2: STUCK AT 1
+
+### Explanation
+In the STUCK AT 1 scenario, a specific signal or bit is forced to remain at logic 1 (high) continuously. This prevents the signal from transitioning to logic 0 and may lead to similar issues as STUCK AT 0, such as data corruption or system malfunction.
+
+### Application Using Arduino
+To simulate the STUCK AT 1 fault injection using Arduino:
+1. Select the target signal or pin.
+2. Introduce voltage manipulation to keep the signal at logic 1.
+3. Validate the Arduino system's response for anomalies such as incorrect data processing.
+
+
 ## Results
 The results of the electromyographic data analysis reveal significant insights into muscle activity patterns, signal characteristics, and neuromuscular function. Statistical analysis techniques, including mean amplitude, root mean square, and spectral analysis, provide quantitative measures of muscle activation, fatigue, and coordination. Additionally, visual representations, such as electromyogram waveforms and power spectral density plots, illustrate the temporal and spectral characteristics of the electromyographic signals. Comparative analysis with previous studies and normative data sets further elucidates the findings and their implications for clinical practice and research.
 
