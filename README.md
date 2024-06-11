@@ -247,6 +247,12 @@ void loop() {
 }
 ```
 3. Monitor the Arduino system's behavior to observe anomalies such as incorrect data processing or system crashes.
+### Graph of EMG Stuck at 0
+
+
+https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/122794054/5ab95bc3-e33b-447b-9c6c-3f6cd8a34a6b
+
+
 
 ## CASE 2: STUCK AT 1
 
@@ -257,8 +263,39 @@ In the STUCK AT 1 scenario, a specific signal or bit is forced to remain at logi
 To simulate the STUCK AT 1 fault injection using Arduino:
 1. Select the target signal or pin.
 2. Introduce voltage manipulation to keep the signal at logic 1.
-3. Validate the Arduino system's response for anomalies such as incorrect data processing.
+### Video Demonstration of CASE 2
 
+
+https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/122794054/3dc8e7b9-e98d-41a8-942e-655d9a676c42
+
+### Working Code of CASE 2
+```
+const int ledPins[] = {2, 3, 4, 5}; // LED pins
+const int numLeds = 4; // Number of LEDs
+
+void setup() {
+  Serial.begin(9600); // Start serial communication at 9600 baud
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT); // Set LED pins as output
+    digitalWrite(ledPins[i], HIGH); // Set all LEDs to HIGH (stuck at 1)
+  }
+}
+
+void loop() {
+  // Print LED states to Serial Plotter
+  for (int i = 0; i < numLeds; i++) {
+    Serial.print("LED ");
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.print(digitalRead(ledPins[i]));
+    Serial.print("\t");
+  }
+  Serial.println();
+  delay(1000); // Delay for 1 second
+}
+```
+3. Validate the Arduino system's response for anomalies such as incorrect data processing.
+### Graph of EMG Stuck at 1
 
 ## Results
 The results of the electromyographic data analysis reveal significant insights into muscle activity patterns, signal characteristics, and neuromuscular function. Statistical analysis techniques, including mean amplitude, root mean square, and spectral analysis, provide quantitative measures of muscle activation, fatigue, and coordination. Additionally, visual representations, such as electromyogram waveforms and power spectral density plots, illustrate the temporal and spectral characteristics of the electromyographic signals. Comparative analysis with previous studies and normative data sets further elucidates the findings and their implications for clinical practice and research.
