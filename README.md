@@ -146,8 +146,6 @@ void Delay_ms(uint32_t ms)
 
 ## Demo Video
 [https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/blob/main/2024-06-01_1717254892391.mp4](https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/blob/main/WhatsApp%20Video%202024-06-02%20at%2014.12.26_cce5b800.mp4)
-## Discussion
-The discussion section interprets the results within the context of the research objectives and literature reviewed. Key findings, including muscle activation patterns, fatigue mechanisms, and neuromuscular coordination, are analyzed and discussed in relation to existing theories and hypotheses. The implications of the findings for clinical diagnosis, rehabilitation strategies, and biomechanical modeling are explored, highlighting the potential applications of electromyography in various medical and engineering fields. Limitations of the study, including sample size constraints, electrode placement variability, and signal processing assumptions, are acknowledged, and future research directions are proposed to address these challenges and expand our understanding of electromyographic principles and practices.
 
 # Hardware Security Testing Using Fault Injection
 
@@ -301,6 +299,8 @@ void loop() {
 https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/122794054/185cfbf3-38cc-44c5-be95-8ba84ea9d12f
 
 
+## Discussion
+The discussion section interprets the results within the context of the research objectives and literature reviewed. Key findings, including muscle activation patterns, fatigue mechanisms, and neuromuscular coordination, are analyzed and discussed in relation to existing theories and hypotheses. The implications of the findings for clinical diagnosis, rehabilitation strategies, and biomechanical modeling are explored, highlighting the potential applications of electromyography in various medical and engineering fields. Limitations of the study, including sample size constraints, electrode placement variability, and signal processing assumptions, are acknowledged, and future research directions are proposed to address these challenges and expand our understanding of electromyographic principles and practices.
 ## Results
 The results of the electromyographic data analysis reveal significant insights into muscle activity patterns, signal characteristics, and neuromuscular function. Statistical analysis techniques, including mean amplitude, root mean square, and spectral analysis, provide quantitative measures of muscle activation, fatigue, and coordination. Additionally, visual representations, such as electromyogram waveforms and power spectral density plots, illustrate the temporal and spectral characteristics of the electromyographic signals. Comparative analysis with previous studies and normative data sets further elucidates the findings and their implications for clinical practice and research.
 
