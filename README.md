@@ -193,7 +193,7 @@ Fault injection is a technique used to test the robustness and reliability of ha
 6. **Interpretation of Results:** Analyzing the results of fault injection tests can be challenging and requires expert judgment.
 7. **Test Coverage:** Ensuring comprehensive coverage of all potential fault scenarios can be difficult.
 8. **Safety:** Ensuring the safety of testers and equipment when using methods like high-voltage or laser fault injection.
-# Methods of Fault Injection in ELECTROMYOGRAPHY (EMG) Project
+# Fault Injection in ELECTROMYOGRAPHY (EMG) Project
 
 ## Hardware-Based Fault Injection: Voltage Glitching
 ## Introduction
@@ -296,6 +296,10 @@ void loop() {
 ```
 3. Validate the Arduino system's response for anomalies such as incorrect data processing.
 ### Graph of EMG Stuck at 1
+
+
+https://github.com/iamavi07/Avinash-Pranav-BinaryBandits/assets/122794054/185cfbf3-38cc-44c5-be95-8ba84ea9d12f
+
 
 ## Results
 The results of the electromyographic data analysis reveal significant insights into muscle activity patterns, signal characteristics, and neuromuscular function. Statistical analysis techniques, including mean amplitude, root mean square, and spectral analysis, provide quantitative measures of muscle activation, fatigue, and coordination. Additionally, visual representations, such as electromyogram waveforms and power spectral density plots, illustrate the temporal and spectral characteristics of the electromyographic signals. Comparative analysis with previous studies and normative data sets further elucidates the findings and their implications for clinical practice and research.
