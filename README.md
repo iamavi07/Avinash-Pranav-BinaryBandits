@@ -72,7 +72,7 @@ Specifications and Pin Configurations.
 // Function prototypes
 void GPIO_LED_INIT(void);
 uint16_t map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
-uint16_t ADC_Read(uint16_t pin);
+uint16_t ADC_Read(uint8_t channel);
 void Delay_ms(uint32_t ms);
 
 // Function to configure GPIO Pins
@@ -80,23 +80,73 @@ void GPIO_LED_INIT(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure = {0};
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+    // Enable clocks for GPIOA and GPIOD
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOD, ENABLE);
 
-    GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+    // Configure GPIOD pins (LEDs) as output
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOD, &GPIO_InitStructure);
 
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1; // Changed to GPIO_Pin_1 (PA1)
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // Assuming GPIO_Pin_1 is an input pin
+    // Configure GPIOA pin (PA1) as analog input for ADC
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
 // Function to map values from one range to another
 uint16_t map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)
 {
+    if (x < in_min) x = in_min;
+    if (x > in_max) x = in_max;
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+// Function to initialize ADC
+void ADC_InitConfig(void)
+{
+    ADC_InitTypeDef ADC_InitStructure = {0};
+
+    // Enable ADC1 clock
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+
+    // Configure ADC parameters
+    ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+    ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+    ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+    ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+    ADC_InitStructure.ADC_NbrOfChannel = 1;
+    ADC_Init(ADC1, &ADC_InitStructure);
+
+    // Start ADC calibration
+    ADC_ResetCalibration(ADC1);
+    while (ADC_GetResetCalibrationStatus(ADC1));
+    ADC_StartCalibration(ADC1);
+    while (ADC_GetCalibrationStatus(ADC1));
+}
+
+// Function to read analog value from ADC channel
+uint16_t ADC_Read(uint8_t channel)
+{
+    // Configure the ADC channel
+    ADC_RegularChannelConfig(ADC1, channel, 1, ADC_SampleTime_55Cycles5);
+
+    // Start ADC conversion
+    ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+
+    // Wait for conversion to complete
+    while (!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC));
+
+    // Return ADC value
+    return ADC_GetConversionValue(ADC1);
+}
+
+// Delay function (blocking)
+void Delay_ms(uint32_t ms)
+{
+    for (uint32_t i = 0; i < ms * 8000; i++) __NOP(); // Adjust loop count for your MCU clock speed
 }
 
 // Main Function
@@ -105,43 +155,34 @@ int main(void)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     SystemCoreClockUpdate();
     Delay_Init();
+
+    // Initialize GPIO and ADC
     GPIO_LED_INIT();
+    ADC_InitConfig();
 
-    while(1)
+    while (1)
     {
-        uint16_t analogValue = ADC_Read(GPIO_Pin_1); // Changed to GPIO_Pin_1 (PA1)
-        uint16_t mappedValue = map(analogValue, 0, 1023, 0, 7);
+        // Read analog value from ADC (channel 1 for PA1)
+        uint16_t analogValue = ADC_Read(ADC_Channel_1);
 
-        // Clear all LED pins
-        for(int i = 1; i <= 6; i++) {
-            GPIO_WriteBit(GPIOD, (1 << i), (BitAction)RESET); // Cast RESET to BitAction
+        // Map ADC value (0-4095 for 12-bit ADC) to LED range (0-6)
+        uint16_t mappedValue = map(analogValue, 0, 4095, 0, 6);
+
+        // Turn off all LEDs
+        for (int i = 2; i <= 7; i++) {
+            GPIO_WriteBit(GPIOD, (1 << i), Bit_RESET);
         }
 
         // Turn on LEDs based on the mapped value
-        for(int i = 1; i <= 7; i++) {
-            if(mappedValue > i) {
-               
-                GPIO_WriteBit(GPIOD, i, (BitAction)SET);
-                
-            }
+        for (int i = 2; i <= 2 + mappedValue; i++) {
+            GPIO_WriteBit(GPIOD, (1 << i), Bit_SET);
         }
 
+        // Small delay between updates
         Delay_ms(100);
     }
 }
 
-// Placeholder function for reading the analog value from ADC
-uint16_t ADC_Read(uint16_t pin)
-{
-    // Implement ADC reading logic here
-    return 512; // Example return value, replace with actual ADC reading
-}
-
-// Placeholder for Delay_ms function
-void Delay_ms(uint32_t ms)
-{
-    // Implement delay logic here
-}
 ```
 
 ## Demo Video
